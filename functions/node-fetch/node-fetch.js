@@ -1,13 +1,25 @@
 const fetch = require('node-fetch')
 
-const handler = async function () {
+const handler = async event => {
+  // console.log(event.queryStringParameters['username']);
+  var username;
+  if (event.queryStringParameters !=='') {
+    username = event.queryStringParameters['username']
+  }
+
+  // console.log(username);
+
+  var url = `https://api.twitter.com/2/users/by/username/${username}`
+
   try {
-    const response = await fetch('https://api.twitter.com/2/users/by?usernames=tanaypratap', {
+    const response = await fetch(url, {
       headers: { Accept: 'application/json',
         Authorization: process.env.TWITTER_BEARER_TOKEN,
 
     },
     })
+    console.log(response);
+
     if (!response.ok) {
       // NOT res.status >= 200 && res.status < 300
       return { statusCode: response.status, body: response.statusText }
