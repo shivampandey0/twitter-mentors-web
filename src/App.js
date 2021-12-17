@@ -1,5 +1,5 @@
 import './App.css';
-import { useState, useEffect } from 'react'
+import { useState } from 'react'
 
 function App() {
 
@@ -21,7 +21,7 @@ function App() {
 
   return (
     <div className="App">
-      <h2>Twitter Wrap</h2>
+      <h2>Twitter Playground</h2>
 
       <div className="input">
         <input type="text" placeholder='Username' onChange={(e) => setUsername(e.target.value)} />

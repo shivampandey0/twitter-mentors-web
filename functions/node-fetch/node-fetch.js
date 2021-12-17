@@ -3,7 +3,7 @@ const fetch = require('node-fetch')
 const handler = async event => {
   // console.log(event.queryStringParameters['username']);
   var username;
-  if (event.queryStringParameters !=='') {
+  if (event.queryStringParameters !== '') {
     username = event.queryStringParameters['username']
   }
 
@@ -13,10 +13,10 @@ const handler = async event => {
 
   try {
     const response = await fetch(url, {
-      headers: { Accept: 'application/json',
+      headers: {
+        Accept: 'application/json',
         Authorization: process.env.TWITTER_BEARER_TOKEN,
-
-    },
+      },
     })
     console.log(response);
 
