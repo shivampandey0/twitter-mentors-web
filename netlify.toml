@@ -2,3 +2,8 @@
 command ='yarn build && cd functions/node-fetch && yarn'
 functions = 'functions'
 publish = 'build'
+
+[[redirects]]
+from = "/api/*"
+to = "/.netlify/functions/:splat"
+status = 200

@@ -9,7 +9,7 @@ function App() {
 
   function getData() {
 
-    fetch(`/.netlify/functions/node-fetch?username=${username}`)
+    fetch(`/.netlify/functions/fetchUser?username=${username}`)
       .then((x) => x.json())
       .then(({ msg }) => {
         console.log(msg.data);
