@@ -1,5 +1,5 @@
 [build]
-command ='yarn build && cd functions/node-fetch && yarn'
+command ='yarn build && cd functions/fetchUser && yarn'
 functions = 'functions'
 publish = 'build'
 
