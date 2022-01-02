@@ -9,63 +9,51 @@ import Welcome from './components/Welcome'
 
 function App() {
 
-  const [message, setMsg] = useState([])
-  const [usernames, setUsernames] = useState([])
+  const [usernames, setUsernames] = useState('')
   const [users, setUsers] = useState([])
   const [userSelected, setUserSelected] = useState({})
 
 
   function getData() {
-    fetch(`/.netlify/functions/fetchUser?username=${usernames}`)
+    console.log('usernames for search', usernames);
+
+    fetch(`/.netlify/functions/fetchUser?usernames=${usernames}`)
       .then((x) => x.json())
       .then(({ msg }) => {
-        console.log(msg.data);
-        return setMsg(`${msg.data.id} ${msg.data.name}`)
+        let usersList = users ? users.concat(msg.data) : msg.data;
+        setUsers(usersList)
+        storeLocally(usersList)
       })
   }
 
-  function storeLocally(data) {
-    setUsernames(data)
-    localStorage.setItem('username', data);
+  function storeLocally(usersList) {
+    localStorage.setItem('usersList', JSON.stringify(usersList));
   }
 
   useEffect(() => {
-    let username = localStorage.getItem('username')
-    console.log(username);
-    setUsernames(username)
+    let usersList = JSON.parse(localStorage.getItem('usersList'))
+    setUsers(usersList)
 
   }, [])
 
   return (
     <div className="App">
-      {/* <h2>Twitter Playground</h2>
-
-      <div className="input">
-        <input type="text" placeholder='Username' onChange={(e) => storeLocally(e.target.value)} value={username} />
-
-      </div>
-      <button type="submit" onClick={() => getData()}>Fetch</button>
-      <div className="output">
-        {message}
-      </div> */}
-
       <aside>
         <header>
           <Avatar image={twitterLogo} />
         </header>
-        <Search search={usernames} setSearch={setUsernames} />
+        <Search setSearch={setUsernames} onClick={() => getData()} />
         <div className="user__boxes">
           {
-            users.map(user => (
+            users ? (users.map(user => (
               <UserBox
                 name={user.name}
                 key={user.id}
                 setUserSelected={setUserSelected}
-                image={user.image}
+                image={user.profile_image_url}
               />
-            ))
+            ))) : (<div></div>)
           }
-
         </div>
       </aside>
       {
@@ -80,10 +68,6 @@ function App() {
           <Welcome />
         )
       }
-
-
-
-
     </div>
   );
 }

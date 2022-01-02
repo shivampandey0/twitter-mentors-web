@@ -44,6 +44,10 @@ input{
   padding: 0.5rem 1rem;
 }
 
+button{
+  cursor: pointer;
+}
+
 /* Utility */
 
 .welcome{
@@ -86,16 +90,30 @@ input{
   padding: 0 0.75rem;
 }
 
-.search__component input[type='text']{
-  background-image: url(./assets/search.svg);
+.search__component button{
+  background-color: #f7f7f7;
+  border: none;
+}
+
+/* .search__component input[type='text']{
   background-repeat: no-repeat;
   background-size: 1rem 1rem;
   background-position: 0.45rem 0.35rem;
   padding-left: 2rem;
 
-}
+} */
 
 .user__boxes{
   overflow-y: auto;
   flex: 1;
+}
+
+.user__box{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user__box:hover{
+  background: cornflowerblue;
 }
