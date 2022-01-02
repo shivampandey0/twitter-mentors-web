@@ -1,12 +1,12 @@
 const fetch = require('node-fetch')
 
 const handler = async event => {
-  var username;
+  var usernames;
   if (event.queryStringParameters !== '') {
-    username = event.queryStringParameters['username']
+    usernames = event.queryStringParameters['usernames']
   }
 
-  var url = `https://api.twitter.com/2/users/by/username/${username}`
+  var url = `https://api.twitter.com/2/users/by?user.fields=profile_image_url&usernames=${usernames}`
 
   try {
     const response = await fetch(url, {
