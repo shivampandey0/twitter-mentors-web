@@ -17,8 +17,6 @@ function App() {
       })
   }
 
-
-
   return (
     <div className="App">
       <h2>Twitter Playground</h2>
