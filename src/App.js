@@ -17,7 +17,7 @@ function App() {
   function getData() {
     console.log('usernames for search', usernames);
 
-    fetch(`/.netlify/functions/fetchUser?usernames=${usernames}`)
+    fetch(`/.netlify/functions/node-fetch?usernames=${usernames}`)
       .then((x) => x.json())
       .then(({ msg }) => {
         let usersList = users ? users.concat(msg.data) : msg.data;
