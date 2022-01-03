@@ -17,7 +17,7 @@ function App() {
   function getData() {
     console.log('usernames for search', usernames);
 
-    fetch(`/.netlify/functions/node-fetch?usernames=${usernames}`)
+    fetch(`/.netlify/functions/user-fetch?usernames=${usernames}`)
       .then((x) => x.json())
       .then(({ msg }) => {
         let usersList = users ? users.concat(msg.data) : msg.data;
@@ -47,10 +47,9 @@ function App() {
           {
             users ? (users.map(user => (
               <UserBox
-                name={user.name}
+                user={user}
                 key={user.id}
                 setUserSelected={setUserSelected}
-                image={user.profile_image_url}
               />
             ))) : (<div></div>)
           }
@@ -60,9 +59,9 @@ function App() {
         userSelected.id ? (
           <main>
             <header>
-              <Avatar image={userSelected.image} />
+              <Avatar image={userSelected.profile_image_url} name={userSelected.name}/>
             </header>
-            <Tweets></Tweets>
+            <Tweets userID={userSelected.id} />
           </main>
         ) : (
           <Welcome />

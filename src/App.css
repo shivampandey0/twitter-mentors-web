@@ -117,3 +117,8 @@ button{
 .user__box:hover{
   background: cornflowerblue;
 }
+
+.tweet__box p{
+  margin: 1rem;
+  background-color: rgb(160, 230, 240);
+}
