@@ -1,34 +1,73 @@
 import './App.css';
-import { useState } from 'react'
+import twitterLogo from './assets/twitter.svg'
+import { useState, useEffect } from 'react'
+import Search from './components/Search'
+import Avatar from './components/Avatar'
+import UserBox from './components/UserBox';
+import Tweets from './components/Tweets'
+import Welcome from './components/Welcome'
 
 function App() {
 
-  const [message, setMsg] = useState([])
-  const [username, setUsername] = useState('')
+  const [usernames, setUsernames] = useState('')
+  const [users, setUsers] = useState([])
+  const [userSelected, setUserSelected] = useState({})
 
 
   function getData() {
+    console.log('usernames for search', usernames);
 
-    fetch(`/.netlify/functions/fetchUser?username=${username}`)
+    fetch(`/.netlify/functions/node-fetch?usernames=${usernames}`)
       .then((x) => x.json())
       .then(({ msg }) => {
-        console.log(msg.data);
-        return setMsg(`${msg.data.id} ${msg.data.name}`)
+        let usersList = users ? users.concat(msg.data) : msg.data;
+        setUsers(usersList)
+        storeLocally(usersList)
       })
   }
 
+  function storeLocally(usersList) {
+    localStorage.setItem('usersList', JSON.stringify(usersList));
+  }
+
+  useEffect(() => {
+    let usersList = JSON.parse(localStorage.getItem('usersList'))
+    setUsers(usersList)
+
+  }, [])
+
   return (
     <div className="App">
-      <h2>Twitter Playground</h2>
-
-      <div className="input">
-        <input type="text" placeholder='Username' onChange={(e) => setUsername(e.target.value)} />
-
-      </div>
-      <button type="submit" onClick={() => getData()}>Fetch</button>
-      <div className="output">
-        {message}
-      </div>
+      <aside>
+        <header>
+          <Avatar image={twitterLogo} />
+        </header>
+        <Search setSearch={setUsernames} onClick={() => getData()} />
+        <div className="user__boxes">
+          {
+            users ? (users.map(user => (
+              <UserBox
+                name={user.name}
+                key={user.id}
+                setUserSelected={setUserSelected}
+                image={user.profile_image_url}
+              />
+            ))) : (<div></div>)
+          }
+        </div>
+      </aside>
+      {
+        userSelected.id ? (
+          <main>
+            <header>
+              <Avatar image={userSelected.image} />
+            </header>
+            <Tweets></Tweets>
+          </main>
+        ) : (
+          <Welcome />
+        )
+      }
     </div>
   );
 }

@@ -1,38 +1,119 @@
+*{
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
 .App {
-  text-align: center;
+  display: flex;
+  height: 100vh;
 }
 
-.App-logo {
-  height: 40vmin;
-  pointer-events: none;
-}
-
-@media (prefers-reduced-motion: no-preference) {
-  .App-logo {
-    animation: App-logo-spin infinite 20s linear;
-  }
-}
-
-.App-header {
-  background-color: #282c34;
-  min-height: 100vh;
+aside{
+  width: 30%;
   display: flex;
   flex-direction: column;
+}
+
+main{
+  width: 70%;
+  background: #e5ddd5;
+  display: flex;
+  flex-direction: column;
+  background-size: contain;
+}
+
+main header,
+aside header{
+  background: #ededed;
+  height: 3rem;
+  display: flex;
   align-items: center;
+  justify-content: space-between;
+}
+
+main header{
+  justify-content: flex-start;
+  padding: 0 1rem;
+}
+
+input{
+  border: none;
+  border-radius: 1rem;
+  width: 100%;
+  padding: 0.5rem 1rem;
+}
+
+button{
+  cursor: pointer;
+}
+
+/* Utility */
+
+.welcome{
+  background: #f8f9fa;
+  flex: 1;
+  display: flex;
+  flex-direction: column;
   justify-content: center;
-  font-size: calc(10px + 2vmin);
-  color: white;
+  align-items: center;
 }
 
-.App-link {
-  color: #61dafb;
+.welcome img{
+  width: 10%;
 }
 
-@keyframes App-logo-spin {
-  from {
-    transform: rotate(0deg);
-  }
-  to {
-    transform: rotate(360deg);
-  }
+.welcome h2{
+  font-weight: normal;
+  margin: 1rem;
+}
+
+.right__section{
+  width: 100%;
+}
+
+.logo__component{
+  display: flex;
+  align-items: center;
+}
+
+.logo{
+  height: 2rem;
+  margin: 0 0.75rem;
+}
+
+.search__component{
+  height: 2.75rem;
+  background: #f7f7f7;
+  display: flex;
+  align-items: center;
+  padding: 0 0.75rem;
+}
+
+.search__component button{
+  background-color: #f7f7f7;
+  border: none;
+}
+
+/* .search__component input[type='text']{
+  background-repeat: no-repeat;
+  background-size: 1rem 1rem;
+  background-position: 0.45rem 0.35rem;
+  padding-left: 2rem;
+
+} */
+
+.user__boxes{
+  overflow-y: auto;
+  flex: 1;
+}
+
+.user__box{
+  display: flex;
+  align-items: center;
+  cursor: pointer;
+}
+
+.user__box:hover{
+  background: cornflowerblue;
 }
