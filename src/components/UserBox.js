@@ -1,10 +1,10 @@
 
-export default function UserBox({ name, image, setUserSelected }) {
+export default function UserBox({ user, setUserSelected }) {
     return (
-        <div className="user__box">
-            <img className='logo' src={image} alt="logo" />
+        <div className="user__box" onClick={()=> setUserSelected(user)}>
+            <img className='logo' src={user.profile_image_url} alt="user_image" />
             <div className="user__info">
-                <h3>{name}</h3>
+                <h3>{user.name}</h3>
                 <span>Tap to see recent tweets</span>
             </div>
         </div>
