@@ -1,2 +1,2 @@
-# twitter-api-v2-app
+# Twitter Mentors Web
  A setup for twitter api to build and explore
