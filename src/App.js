@@ -6,6 +6,7 @@ import Avatar from './components/Avatar'
 import UserBox from './components/UserBox';
 import Tweets from './components/Tweets'
 import Welcome from './components/Welcome'
+import UserActions from './components/UserActions'
 
 function App() {
 
@@ -28,6 +29,20 @@ function App() {
 
   function storeLocally(usersList) {
     localStorage.setItem('usersList', JSON.stringify(usersList));
+  }
+
+  function openProfile(username) {
+    window.open(`https://twitter.com/${username}`,'_blank')
+    
+  }
+
+  function removeProfile(userId) {
+
+    const usersList = users.filter((item) => item.id !== userId)
+    setUsers(usersList)
+    storeLocally(usersList)    
+    setUserSelected({})
+
   }
 
   useEffect(() => {
@@ -60,6 +75,7 @@ function App() {
           <main>
             <header>
               <Avatar image={userSelected.profile_image_url} name={userSelected.name}/>
+              <UserActions openProfile={()=>openProfile(userSelected.username)} deleteUser={()=> removeProfile(userSelected.id)}/>
             </header>
             <Tweets userID={userSelected.id} />
           </main>
