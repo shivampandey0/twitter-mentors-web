@@ -33,7 +33,7 @@ aside header{
 }
 
 main header{
-  justify-content: flex-start;
+  justify-content: space-between;
   padding: 0 1rem;
 }
 
@@ -115,10 +115,21 @@ button{
 }
 
 .user__box:hover{
-  background: cornflowerblue;
+  background: gainsboro;
 }
 
 .tweet__box p{
   margin: 1rem;
   background-color: rgb(160, 230, 240);
+}
+
+.user__info span{
+  font-style: italic;
+  font-size: small;
+}
+
+.user__actions{
+  display: flex;
+  width: 20%;
+  justify-content: space-evenly;
 }
