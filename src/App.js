@@ -83,7 +83,7 @@ function App() {
               <Avatar image={userSelected.profile_image_url} name={userSelected.name} />
               <UserActions openProfile={() => openProfile(userSelected.username)} deleteUser={() => removeProfile(userSelected.id)} />
             </header>
-            <Tweets userID={userSelected.id} />
+            <Tweets {...userSelected} />
           </main>
         ) : (
           <Welcome />

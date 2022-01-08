@@ -1,27 +1,25 @@
 import React, { useEffect, useState } from 'react'
 import Welcome from './Welcome';
 
-function Tweets({ userID }) {
+function Tweets({ id , username }) {
 
     const [tweets, setTweets] = useState([])
-
-
-
+    
     useEffect(() => {
         async function getData() {
-            setTweets([])
-            await fetch(`/.netlify/functions/tweets-fetch?user_id=${userID}`)
+            await fetch(`/.netlify/functions/tweets-fetch?user_id=${id}`)
                 .then((x) => x.json())
                 .then(({ msg }) => {
-                    console.log(msg.data);
                     setTweets(msg.data)
-
                 })
         }
-
         getData()
+    }, [id])
 
-    }, [userID])
+        function openTweet(tweetID) {
+            window.open(`https://twitter.com/${username}/status/${tweetID}`, '_blank')
+        }
+    
 
 
     return (
@@ -29,7 +27,7 @@ function Tweets({ userID }) {
             {
                 tweets ? (tweets.map(tweet => {
                     return (
-                        <div className='tweet__box' key={tweet.id}>
+                        <div className='tweet__box' key={tweet.id} onClick={()=>openTweet(tweet.id)}>
                             <p>{tweet.text}</p>
                         </div>
                     )
