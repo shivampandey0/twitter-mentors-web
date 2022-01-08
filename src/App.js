@@ -6,6 +6,7 @@ import Avatar from './components/Avatar'
 import UserBox from './components/UserBox';
 import Tweets from './components/Tweets'
 import Welcome from './components/Welcome'
+import UserActions from './components/UserActions'
 
 function App() {
 
@@ -13,21 +14,41 @@ function App() {
   const [users, setUsers] = useState([])
   const [userSelected, setUserSelected] = useState({})
 
-
   function getData() {
-    console.log('usernames for search', usernames);
-
-    fetch(`/.netlify/functions/user-fetch?usernames=${usernames}`)
-      .then((x) => x.json())
-      .then(({ msg }) => {
-        let usersList = users ? users.concat(msg.data) : msg.data;
-        setUsers(usersList)
-        storeLocally(usersList)
-      })
+    const user = doesExist(usernames)
+    if (user) {
+      setUserSelected(user)
+      alert('User already exists!')
+    } else {
+      fetch(`/.netlify/functions/user-fetch?usernames=${usernames}`)
+        .then((x) => x.json())
+        .then(({ msg }) => {
+          let usersList = users ? users.concat(msg.data) : msg.data;
+          storeLocally(usersList)
+        })
+    }
   }
 
   function storeLocally(usersList) {
+    setUsers(usersList)
     localStorage.setItem('usersList', JSON.stringify(usersList));
+  }
+
+  function openProfile(username) {
+    window.open(`https://twitter.com/${username}`, '_blank')
+
+  }
+
+  function removeProfile(userId) {
+    const usersList = users.filter((item) => item.id !== userId)
+    storeLocally(usersList)
+    setUserSelected({})
+  }
+
+
+  function doesExist(username) {
+    const exists = users.find(user => user.username === username)
+    return exists;
   }
 
   useEffect(() => {
@@ -59,9 +80,10 @@ function App() {
         userSelected.id ? (
           <main>
             <header>
-              <Avatar image={userSelected.profile_image_url} name={userSelected.name}/>
+              <Avatar image={userSelected.profile_image_url} name={userSelected.name} />
+              <UserActions openProfile={() => openProfile(userSelected.username)} deleteUser={() => removeProfile(userSelected.id)} />
             </header>
-            <Tweets userID={userSelected.id} />
+            <Tweets {...userSelected} />
           </main>
         ) : (
           <Welcome />
