@@ -18,6 +18,7 @@ function App() {
     const user = doesExist(usernames)
     if (user) {
       setUserSelected(user)
+      alert('User already exists!')
     } else {
       fetch(`/.netlify/functions/user-fetch?usernames=${usernames}`)
         .then((x) => x.json())
@@ -46,7 +47,6 @@ function App() {
 
 
   function doesExist(username) {
-
     const exists = users.find(user => user.username === username)
     return exists;
   }

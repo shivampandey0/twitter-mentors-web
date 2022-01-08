@@ -8,12 +8,9 @@ export default function Search({ setSearch, onClick}){
             <input
             type = "text"
             placeholder="Enter Username"
-            onChange={(e) => setSearch(e.target.value)}
+            onChange={(e) => setSearch(e.target.value.toLowerCase())}
             onKeyDown={(e) => {
-                if(e.key === 'Enter'){
-                    onClick();
-                    
-                }
+                if(e.key === 'Enter') onClick();    
             }}
             />
             <button onClick={()=>onClick()}>Add</button>
