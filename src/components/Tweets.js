@@ -20,16 +20,25 @@ function Tweets({ id, username }) {
   }
 
   return (
-    <div className="tweets__section">
+    <div className="tweets-section">
       {tweets ? (
         tweets.map((tweet) => {
           return (
             <div
-              className="tweet__box"
+              className="tweet-box badge-wrapper"
               key={tweet.id}
               onClick={() => openTweet(tweet.id)}
             >
-              <p>{tweet.text}</p>
+              <p className="txt-sm">{tweet.text}</p>
+              <span class="badge badge-info">
+                {tweet.text.startsWith("RT") ? (
+                  <i class="fas fa-retweet"></i>
+                ) : tweet.text.startsWith("@") ? (
+                  <i class="fas fa-reply"></i>
+                ) : (
+                  <i class="fab fa-twitter"></i>
+                )}
+              </span>
             </div>
           );
         })

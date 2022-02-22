@@ -4,7 +4,7 @@
   --white: var(--white);
   --border: var(--border);
   --primary: #2196f3;
-  --primary-dark: ##1976d2;
+  --primary-dark: #1976d2;
   --primary-light: #bbdefb;
   --accent: #03a9f4;
 }
@@ -15,23 +15,29 @@ html {
 
 .app {
   height: 100vh;
+  overflow: hidden;
 }
 
 .sidebar {
   width: 30%;
   border-right: 1px solid var(--primary-light);
+  overflow-y: auto;
 }
 
 .container {
-  flex-grow: 1;
+  width: 70%;
   background: var(--white);
+  overflow-y: auto;
 }
 
 .appbar {
+  position: sticky;
+  top: 0;
   background: var(--primary-light);
   height: var(--scale-3);
   display: flex;
   align-items: center;
+  z-index: var(--z-3);
   justify-content: space-between;
 }
 
@@ -84,18 +90,25 @@ html {
   background: var(--primary-light);
 }
 
-.tweet__box p {
-  cursor: pointer;
-  margin: 1rem;
-  background-color: rgb(160, 230, 240);
+.tweets-section {
+  overflow-y: auto;
 }
 
-.user__info span {
+.tweet-box {
+  cursor: pointer;
+  margin: var(--size-2) 1rem;
+  padding: 1rem;
+  border-radius: var(--radius-lg);
+  color: var(--primary-dark);
+  border: 1px solid var(--primary-dark);
+}
+
+.user-info span {
   font-style: italic;
   font-size: small;
 }
 
-.user__actions {
+.user-actions {
   display: flex;
   width: 20%;
   justify-content: space-evenly;
@@ -105,4 +118,12 @@ html {
 
 .pointer {
   cursor: pointer;
+}
+
+.badge-info {
+  width: var(--size-6);
+  height: var(--size-6);
+  padding: var(--size-2);
+  left: -6px;
+  color: white;
 }

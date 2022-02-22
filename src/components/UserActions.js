@@ -3,13 +3,17 @@ import { FaExternalLinkAlt, FaTrashAlt } from "react-icons/fa";
 
 function UserActions({ openProfile, deleteUser }) {
   return (
-    <div className="user__actions">
+    <div className="user-actions">
       <FaExternalLinkAlt
         cursor={"pointer"}
-        color={"grey"}
+        color={"var(--primary)"}
         onClick={openProfile}
       />
-      <FaTrashAlt cursor={"pointer"} color={"red"} onClick={deleteUser} />
+      <FaTrashAlt
+        cursor={"pointer"}
+        color={"var(--primary-dark)"}
+        onClick={deleteUser}
+      />
     </div>
   );
 }
