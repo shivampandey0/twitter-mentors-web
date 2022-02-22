@@ -8,12 +8,12 @@ import Tweets from "./components/Tweets";
 import Welcome from "./components/Welcome";
 import UserActions from "./components/UserActions";
 
-function App() {
+const App = () => {
   const [usernames, setUsernames] = useState("");
   const [users, setUsers] = useState([]);
   const [userSelected, setUserSelected] = useState({});
 
-  function getData() {
+  const getData = () => {
     const user = doesExist(usernames);
     if (user) {
       setUserSelected(user);
@@ -26,28 +26,26 @@ function App() {
           storeLocally(usersList);
         });
     }
-  }
+  };
 
-  function storeLocally(usersList) {
+  const storeLocally = (usersList) => {
     setUsers(usersList);
     localStorage.setItem("usersList", JSON.stringify(usersList));
-  }
+  };
 
-  function openProfile(username) {
+  const openProfile = (username) =>
     window.open(`https://twitter.com/${username}`, "_blank");
-  }
 
-  function removeProfile(userId) {
+  const removeProfile = (userId) => {
     const usersList = users.filter((item) => item.id !== userId);
     storeLocally(usersList);
     setUserSelected({});
-  }
+  };
 
-  function doesExist(username) {
+  const doesExist = (username) => {
     const exists = users.find((user) => user.username === username);
-    console.log(exists);
     return exists;
-  }
+  };
 
   useEffect(() => {
     let usersList = JSON.parse(localStorage.getItem("usersList"))
@@ -96,6 +94,6 @@ function App() {
       )}
     </div>
   );
-}
+};
 
 export default App;

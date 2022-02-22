@@ -1,16 +1,22 @@
 import React, { useEffect, useState } from "react";
 import Welcome from "./Welcome";
 
-function Tweets({ id, username }) {
+const Tweets = ({ id, username }) => {
   const [tweets, setTweets] = useState([]);
 
+  // useEffect(() => {
+  //   async function getData() {
+  //     await fetch(`/.netlify/functions/tweets-fetch?user_id=${id}`)
+  //       .then((x) => x.json())
+  //       .then(handleTweets);
+  //   }
+  //   getData();
+  // }, [id]);
+
   useEffect(() => {
-    async function getData() {
-      await fetch(`/.netlify/functions/tweets-fetch?user_id=${id}`)
-        .then((x) => x.json())
-        .then(handleTweets);
-    }
-    getData();
+    fetch(`/.netlify/functions/tweets-fetch?user_id=${id}`)
+      .then((x) => x.json())
+      .then(handleTweets);
   }, [id]);
 
   const handleTweets = (data) => {
@@ -57,6 +63,6 @@ function Tweets({ id, username }) {
       )}
     </div>
   );
-}
+};
 
 export default Tweets;

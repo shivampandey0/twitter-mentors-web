@@ -1,7 +1,7 @@
 import React from "react";
 import { FaExternalLinkAlt, FaTrashAlt } from "react-icons/fa";
 
-function UserActions({ openProfile, deleteUser }) {
+const UserActions = ({ openProfile, deleteUser }) => {
   return (
     <div className="user-actions">
       <FaExternalLinkAlt
@@ -16,6 +16,6 @@ function UserActions({ openProfile, deleteUser }) {
       />
     </div>
   );
-}
+};
 
 export default UserActions;

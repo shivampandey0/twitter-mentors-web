@@ -1,4 +1,4 @@
-export default function Search({ setSearch, onClick }) {
+const Search = ({ setSearch, onClick }) => {
   return (
     <div className="search-component">
       <input
@@ -12,4 +12,6 @@ export default function Search({ setSearch, onClick }) {
       />
     </div>
   );
-}
+};
+
+export default Search;

@@ -1,4 +1,4 @@
-export default function UserBox({ user, setUserSelected }) {
+const UserBox = ({ user, setUserSelected }) => {
   return (
     <div className="user-box pointer" onClick={() => setUserSelected(user)}>
       <img className="avatar" src={user.profile_image_url} alt={user.name} />
@@ -8,4 +8,6 @@ export default function UserBox({ user, setUserSelected }) {
       </div>
     </div>
   );
-}
+};
+
+export default UserBox;
