@@ -45,11 +45,14 @@ function App() {
 
   function doesExist(username) {
     const exists = users.find((user) => user.username === username);
+    console.log(exists);
     return exists;
   }
 
   useEffect(() => {
-    let usersList = JSON.parse(localStorage.getItem("usersList"));
+    let usersList = JSON.parse(localStorage.getItem("usersList"))
+      ? JSON.parse(localStorage.getItem("usersList"))
+      : [];
     setUsers(usersList);
   }, []);
 

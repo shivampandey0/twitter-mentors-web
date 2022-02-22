@@ -8,16 +8,28 @@ function Tweets({ id, username }) {
     async function getData() {
       await fetch(`/.netlify/functions/tweets-fetch?user_id=${id}`)
         .then((x) => x.json())
-        .then(({ msg }) => {
-          setTweets(msg.data);
-        });
+        .then(handleTweets);
     }
     getData();
   }, [id]);
 
-  function openTweet(tweetID) {
+  const handleTweets = (data) => {
+    let tweets = [];
+
+    data.msg.data.forEach((item) => {
+      if (!Array.isArray(item.referenced_tweets)) {
+        tweets = [...tweets, { ...item, type: "tweet" }];
+      }
+    });
+
+    data.msg.includes.tweets.forEach(
+      (item) => (tweets = [...tweets, { ...item, type: "retweet" }])
+    );
+    setTweets(tweets);
+  };
+
+  const openTweet = (tweetID) =>
     window.open(`https://twitter.com/${username}/status/${tweetID}`, "_blank");
-  }
 
   return (
     <div className="tweets-section">
@@ -31,10 +43,8 @@ function Tweets({ id, username }) {
             >
               <p className="txt-sm">{tweet.text}</p>
               <span class="badge badge-info">
-                {tweet.text.startsWith("RT") ? (
+                {tweet.type === "retweet" ? (
                   <i class="fas fa-retweet"></i>
-                ) : tweet.text.startsWith("@") ? (
-                  <i class="fas fa-reply"></i>
                 ) : (
                   <i class="fab fa-twitter"></i>
                 )}
