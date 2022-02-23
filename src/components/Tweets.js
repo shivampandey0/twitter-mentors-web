@@ -4,15 +4,6 @@ import Welcome from "./Welcome";
 const Tweets = ({ id, username }) => {
   const [tweets, setTweets] = useState([]);
 
-  // useEffect(() => {
-  //   async function getData() {
-  //     await fetch(`/.netlify/functions/tweets-fetch?user_id=${id}`)
-  //       .then((x) => x.json())
-  //       .then(handleTweets);
-  //   }
-  //   getData();
-  // }, [id]);
-
   useEffect(() => {
     fetch(`/.netlify/functions/tweets-fetch?user_id=${id}`)
       .then((x) => x.json())
