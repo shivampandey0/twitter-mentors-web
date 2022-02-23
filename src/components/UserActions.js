@@ -1,13 +1,21 @@
-import React from 'react'
-import { FaExternalLinkAlt, FaTrashAlt} from 'react-icons/fa'
+import React from "react";
+import { FaExternalLinkAlt, FaTrashAlt } from "react-icons/fa";
 
-function UserActions({openProfile, deleteUser}) {
-    return (
-        <div className='user__actions'>
-            <FaExternalLinkAlt cursor={'pointer'} color={'grey'} onClick={openProfile} />
-            <FaTrashAlt cursor={'pointer'}  color={'red'} onClick={deleteUser}/>            
-        </div>
-    )
-}
+const UserActions = ({ openProfile, deleteUser }) => {
+  return (
+    <div className="user-actions">
+      <FaExternalLinkAlt
+        cursor={"pointer"}
+        color={"var(--primary)"}
+        onClick={openProfile}
+      />
+      <FaTrashAlt
+        cursor={"pointer"}
+        color={"var(--primary-dark)"}
+        onClick={deleteUser}
+      />
+    </div>
+  );
+};
 
-export default UserActions
+export default UserActions;

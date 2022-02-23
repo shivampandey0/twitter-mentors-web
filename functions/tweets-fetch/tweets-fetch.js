@@ -1,43 +1,37 @@
-const fetch = require('node-fetch')
+const fetch = require("node-fetch");
 
-const handler = async event => {
-    var userID;
-    if (event.queryStringParameters !== '') {
-        userID = event.queryStringParameters['user_id']
+const handler = async (event) => {
+  var userID;
+  if (event.queryStringParameters !== "") {
+    userID = event.queryStringParameters["user_id"];
+  }
+
+  var url = `https://api.twitter.com/2/users/${userID}/tweets?expansions=referenced_tweets.id&exclude=replies`;
+
+  try {
+    const response = await fetch(url, {
+      headers: {
+        Accept: "application/json",
+        Authorization: process.env.TWITTER_BEARER_TOKEN,
+      },
+    });
+    console.log(response);
+
+    if (!response.ok) {
+      return { statusCode: response.status, body: response.statusText };
     }
+    const data = await response.json();
 
-    var url = `https://api.twitter.com/2/users/${userID}/tweets`
+    return {
+      statusCode: 200,
+      body: JSON.stringify({ msg: data }),
+    };
+  } catch (error) {
+    return {
+      statusCode: 500,
+      body: JSON.stringify({ msg: error.message }),
+    };
+  }
+};
 
-    try {
-        const response = await fetch(url, {
-            headers: {
-                Accept: 'application/json',
-                Authorization: process.env.TWITTER_BEARER_TOKEN,
-            },
-        })
-        console.log(response);
-
-        if (!response.ok) {
-            // NOT res.status >= 200 && res.status < 300
-            return { statusCode: response.status, body: response.statusText }
-        }
-        const data = await response.json()
-
-        console.log(data);
-
-        return {
-            statusCode: 200,
-            body: JSON.stringify({ msg: data }),
-        }
-    } catch (error) {
-        // output to netlify function log
-        console.log(error)
-        return {
-            statusCode: 500,
-            // Could be a custom message or object i.e. JSON.stringify(err)
-            body: JSON.stringify({ msg: error.message }),
-        }
-    }
-}
-
-module.exports = { handler }
+module.exports = { handler };
