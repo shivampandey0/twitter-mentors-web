@@ -11,9 +11,12 @@ html {
   font-size: 100%;
 }
 
+body {
+  overflow: hidden;
+}
+
 .app {
   height: 100vh;
-  overflow: hidden;
 }
 
 .sidebar {
@@ -25,7 +28,7 @@ html {
 .container {
   width: 70%;
   background: var(--white);
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .appbar {
