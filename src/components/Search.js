@@ -1,4 +1,4 @@
-const Search = ({ setSearch, onClick }) => {
+const Search = ({ setSearch, searchValue, onClick }) => {
   return (
     <div className="search-component">
       <input
@@ -6,8 +6,12 @@ const Search = ({ setSearch, onClick }) => {
         type="search"
         placeholder="Enter Username and press ↵"
         onChange={(e) => setSearch(e.target.value.toLowerCase())}
+        value={searchValue}
         onKeyDown={(e) => {
-          if (e.key === "Enter") onClick();
+          if (e.key === "Enter") {
+            setSearch("");
+            onClick();
+          }
         }}
       />
     </div>

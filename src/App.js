@@ -60,7 +60,11 @@ const App = () => {
         <header className="appbar">
           <Avatar image={twitterLogo} />
         </header>
-        <Search setSearch={setUsernames} onClick={() => getData()} />
+        <Search
+          setSearch={setUsernames}
+          searchValue={usernames}
+          onClick={() => getData()}
+        />
         <div className="user-boxes">
           {users ? (
             users.map((user) => (

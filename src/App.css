@@ -1,5 +1,3 @@
-@import url("https://marvel-ui.vercel.app/css/marvel-ui.css");
-
 :root {
   --white: var(--white);
   --border: var(--border);
@@ -13,9 +11,12 @@ html {
   font-size: 100%;
 }
 
+body {
+  overflow: hidden;
+}
+
 .app {
   height: 100vh;
-  overflow: hidden;
 }
 
 .sidebar {
@@ -27,7 +28,7 @@ html {
 .container {
   width: 70%;
   background: var(--white);
-  overflow-y: auto;
+  /* overflow-y: auto; */
 }
 
 .appbar {
@@ -52,6 +53,7 @@ html {
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100%;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -91,6 +93,7 @@ html {
 }
 
 .tweets-section {
+  height: 100vh;
   overflow-y: auto;
 }
 
