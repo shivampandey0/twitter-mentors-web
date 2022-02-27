@@ -1,5 +1,3 @@
-@import url("https://marvel-ui.vercel.app/css/marvel-ui.css");
-
 :root {
   --white: var(--white);
   --border: var(--border);
@@ -13,9 +11,12 @@ html {
   font-size: 100%;
 }
 
+body {
+  overflow: hidden;
+}
+
 .app {
   height: 100vh;
-  overflow: hidden;
 }
 
 .sidebar {
@@ -27,18 +28,23 @@ html {
 .container {
   width: 70%;
   background: var(--white);
-  overflow-y: auto;
 }
 
 .appbar {
   position: sticky;
   top: 0;
   background: var(--primary-light);
-  height: var(--scale-3);
+  height: var(--scale-4);
   display: flex;
+  font-size: calc(var(--scale-3) / 2);
   align-items: center;
   z-index: var(--z-3);
   justify-content: space-between;
+}
+
+.avatar-sm {
+  width: var(--scale-3);
+  height: var(--scale-3);
 }
 
 .container > .appbar {
@@ -52,6 +58,7 @@ html {
   flex: 1;
   display: flex;
   flex-direction: column;
+  height: 100%;
   justify-content: center;
   align-items: center;
   gap: 1rem;
@@ -91,6 +98,7 @@ html {
 }
 
 .tweets-section {
+  height: 100vh;
   overflow-y: auto;
 }
 
@@ -103,15 +111,25 @@ html {
   border: 1px solid var(--primary-dark);
 }
 
-.user-info span {
-  font-style: italic;
-  font-size: small;
+.tweets-section div.tweet-box:last-child {
+  margin-bottom: 10%;
 }
 
-.user-actions {
+.tweet-box > p {
+  color: var(--black);
+  font-size: calc(var(--scale-4) / 3);
+}
+
+.user-info span {
+  font-style: italic;
+  font-size: medium;
+}
+
+.appbar-actions {
   display: flex;
-  width: 20%;
+  width: 10%;
   justify-content: space-evenly;
+  margin: 0 1rem;
 }
 
 /* Cursor class */

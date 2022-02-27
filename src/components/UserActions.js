@@ -3,7 +3,7 @@ import { FaExternalLinkAlt, FaTrashAlt } from "react-icons/fa";
 
 const UserActions = ({ openProfile, deleteUser }) => {
   return (
-    <div className="user-actions">
+    <div className="appbar-actions">
       <FaExternalLinkAlt
         cursor={"pointer"}
         color={"var(--primary)"}

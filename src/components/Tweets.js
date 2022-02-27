@@ -3,8 +3,10 @@ import Welcome from "./Welcome";
 
 const Tweets = ({ id, username }) => {
   const [tweets, setTweets] = useState([]);
+  const [tweetsLoading, setTweetsLoading] = useState(false);
 
   useEffect(() => {
+    setTweetsLoading((loading) => !loading);
     fetch(`/.netlify/functions/tweets-fetch?user_id=${id}`)
       .then((x) => x.json())
       .then(handleTweets);
@@ -22,7 +24,9 @@ const Tweets = ({ id, username }) => {
     data.msg.includes.tweets.forEach(
       (item) => (tweets = [...tweets, { ...item, type: "retweet" }])
     );
-    setTweets(tweets);
+    setTweets(() => tweets);
+    setTweetsLoading((loading) => !loading);
+    console.log(tweets);
   };
 
   const openTweet = (tweetID) =>
@@ -30,7 +34,9 @@ const Tweets = ({ id, username }) => {
 
   return (
     <div className="tweets-section">
-      {tweets ? (
+      {tweetsLoading ? (
+        <Welcome msg="Loading..." />
+      ) : tweets ? (
         tweets.map((tweet) => {
           return (
             <div
@@ -38,19 +44,19 @@ const Tweets = ({ id, username }) => {
               key={tweet.id}
               onClick={() => openTweet(tweet.id)}
             >
-              <p className="txt-sm">{tweet.text}</p>
-              <span class="badge badge-info">
+              <p>{tweet.text}</p>
+              <span className="badge badge-info">
                 {tweet.type === "retweet" ? (
-                  <i class="fas fa-retweet"></i>
+                  <i className="fas fa-retweet"></i>
                 ) : (
-                  <i class="fab fa-twitter"></i>
+                  <i className="fab fa-twitter"></i>
                 )}
               </span>
             </div>
           );
         })
       ) : (
-        <Welcome />
+        <Welcome msg="Couldn't load tweets, try again later." />
       )}
     </div>
   );
