@@ -7,6 +7,8 @@ import UserBox from "./components/UserBox";
 import Tweets from "./components/Tweets";
 import Welcome from "./components/Welcome";
 import UserActions from "./components/UserActions";
+import AppActions from "./components/AppActions";
+import { openProfile, openGithub, openTwitter } from "./utils/methods";
 
 const App = () => {
   const [usernames, setUsernames] = useState("");
@@ -33,9 +35,6 @@ const App = () => {
     localStorage.setItem("usersList", JSON.stringify(usersList));
   };
 
-  const openProfile = (username) =>
-    window.open(`https://twitter.com/${username}`, "_blank");
-
   const removeProfile = (userId) => {
     const usersList = users.filter((item) => item.id !== userId);
     storeLocally(usersList);
@@ -59,6 +58,7 @@ const App = () => {
       <aside className="sidebar">
         <header className="appbar">
           <Avatar image={twitterLogo} />
+          <AppActions openGithub={openGithub} openTwitter={openTwitter} />
         </header>
         <Search
           setSearch={setUsernames}

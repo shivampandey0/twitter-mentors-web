@@ -44,7 +44,7 @@ const Tweets = ({ id, username }) => {
               key={tweet.id}
               onClick={() => openTweet(tweet.id)}
             >
-              <p className="txt-sm">{tweet.text}</p>
+              <p>{tweet.text}</p>
               <span className="badge badge-info">
                 {tweet.type === "retweet" ? (
                   <i className="fas fa-retweet"></i>
